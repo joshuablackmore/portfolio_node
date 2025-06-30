@@ -1,0 +1,26 @@
+{% extends "views/shared/layout.njk" %}
+
+{% block content %}
+<h2>{{ pageTitle }}</h2>
+{% for section in discography %}
+  <section>
+    <h2>{{ section.heading }}</h2>
+    <ul>
+      {% for album in section.albums %}
+        <li>
+          <h3>{{ album.title }} ({{ album.year }})</h3>
+          <p>{{ album.description }}</p>
+          {% if album.role %}
+            <p><strong>Role:</strong> {{ album.role }}</p>
+          {% endif %}
+          <p>
+            {% for key, link in album.links %}
+              <a href="{{ link }}" target="_blank">{{ key | capitalize }}</a>{% if not loop.last %} | {% endif %}
+            {% endfor %}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endfor %}
+{% endblock %}

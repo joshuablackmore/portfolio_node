@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}My Portfolio{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/output.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <h1 class="text-red-500">{{ siteName }}</h1>
+      <nav>
+        <ul>
+            {% for link in navLinks %}
+            <li><a href="{{ link.href }}">{{ link.label }}</a></li>
+            {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <p>© {{ year }} Joshua Blackmore</p>
+    </footer>
+  </body>
+</html>

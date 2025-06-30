@@ -1,0 +1,21 @@
+{% extends "views/shared/layout.njk" %}
+
+
+{% block content %}
+{% block title %}{{ pageTitle }}{% endblock %}
+  <section>
+    <h2 class="text-3xl font-bold mb-2">{{ engineeringExperience.organisation }}</h2>
+    <p class="mb-8 text-gray-600">{{ engineeringExperience.summary }}</p>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {% for item in engineeringExperience.highlights %}
+        <div class="card bg-base-100 shadow-md border border-base-200">
+          <div class="card-body">
+            <h3 class="card-title text-lg font-semibold">{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}
