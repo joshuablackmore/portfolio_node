@@ -1,26 +1,59 @@
 {% extends "views/shared/layout.njk" %}
 
+{% block title %}{{ pageTitle }}{% endblock %}
+
 {% block content %}
-<h2>{{ pageTitle }}</h2>
-{% for section in discography %}
   <section>
-    <h2>{{ section.heading }}</h2>
-    <ul>
-      {% for album in section.albums %}
-        <li>
-          <h3>{{ album.title }} ({{ album.year }})</h3>
-          <p>{{ album.description }}</p>
-          {% if album.role %}
-            <p><strong>Role:</strong> {{ album.role }}</p>
-          {% endif %}
-          <p>
-            {% for key, link in album.links %}
-              <a href="{{ link }}" target="_blank">{{ key | capitalize }}</a>{% if not loop.last %} | {% endif %}
+    {% for section in discography %}
+      <div>
+        <h2 class="text-2xl font-bold mb-6">{{ section.heading }}</h2>
+
+        {% if section.albums | length > 1 %}
+        <div class="grid md:grid-cols-2 gap-6 place-items-center md:items-start">
+        {% else %}
+        <div class="flex justify-center">
+        {% endif %}
+
+        {% for album in section.albums %}
+        <div class="card bg-base-100 shadow-md border border-base-200 overflow-hidden max-w-md w-full">
+        {% if album.artwork %}
+        <figure>
+          <img
+            src="{{ album.artwork }}"
+            alt="{{ album.title }} cover"
+            class="w-full h-auto object-cover"
+          />
+        </figure>
+      {% endif %}
+
+      <div class="card-body space-y-2">
+        <div class="flex justify-between items-center">
+          <h3 class="card-title text-lg font-semibold">{{ album.title }}</h3>
+          <span class="text-sm text-gray-500">({{ album.year }})</span>
+        </div>
+
+        <p class="text-sm">Genre: {{ album.genre }}</p>
+
+        {% if album.role %}
+          <p class="text-sm">Role: <span class="italic">{{ album.role }}</span></p>
+        {% endif %}
+
+        <p class="text-base text-gray-600">{{ album.description }}</p>
+
+        {% if album.links %}
+          <div class="flex flex-wrap gap-2 mt-3">
+            {% for label, url in album.links %}
+              <a href="{{ url }}" target="_blank" class="badge badge-outline hover:badge-primary">
+                {{ label | capitalize }}
+              </a>
             {% endfor %}
-          </p>
-        </li>
-      {% endfor %}
-    </ul>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+      </div>
+    {% endfor %}
   </section>
-{% endfor %}
 {% endblock %}

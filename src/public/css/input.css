@@ -1,1 +1,7 @@
+html {
+    scrollbar-gutter: stable; }
 @import "tailwindcss";
+@source "./public/*.{html,js}";
+@plugin "daisyui" {
+    themes: light --default;
+}

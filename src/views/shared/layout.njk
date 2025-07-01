@@ -1,29 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="UTF-8" />
     <title>{% block title %}My Portfolio{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="/css/output.css" rel="stylesheet">
   </head>
-  <body>
-    <header>
-      <h1 class="text-red-500">{{ siteName }}</h1>
-      <nav>
-        <ul>
-            {% for link in navLinks %}
-            <li><a href="{{ link.href }}">{{ link.label }}</a></li>
-            {% endfor %}
-        </ul>
-      </nav>
+    <body class="bg-base-100 text-base-content font-sans">
+  <div class="flex flex-col min-h-screen max-w-4xl mx-auto">
+    
+    <header class="py-6 border-b">
+      <div class="navbar bg-base-100 shadow-sm">
+    <a class="btn btn-ghost text-xl" href="/">{{ siteName }}</a>
+    <div class="navbar-end">
+      <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+        {% for item in navLinks %}
+        <li><a href="{{item.href}}">{{ item.label}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="navbar-end hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      {% for item in navLinks %}
+      <li><a href="{{item.href}}">{{ item.label}}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
     </header>
 
-    <main>
+    <main class="flex-grow">
       {% block content %}{% endblock %}
     </main>
 
-    <footer>
-      <p>© {{ year }} Joshua Blackmore</p>
+    <footer class="text-sm border-t p-4 text-center text-gray-500">
+      <p>© {{ year }} {{ siteName }}</p>
+      {% if contactLinks %}
+        <ul class="mt-2 flex justify-center gap-4">
+          {% for link in contactLinks %}
+            <li><a href="{{ link.href }}" target="_blank" class="hover:underline">{{ link.label }}</a></li>
+          {% endfor %}
+        </ul>
+      {% endif %}
     </footer>
-  </body>
+
+  </div>
+</body>
 </html>

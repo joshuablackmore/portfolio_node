@@ -3,7 +3,7 @@ import nunjucks from 'nunjucks';
 import routes from './routes'
 
 const app = express();
-const PORT = 3000;
+const PORT = 3300;
 
 nunjucks.configure('src', {
     autoescape: true,
