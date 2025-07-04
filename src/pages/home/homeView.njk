@@ -3,17 +3,24 @@
 {% block title %}{{ pageTitle }}{% endblock %}
 
 {% block content %}
-  <section>
-    <h1>{{ name }}</h1>
-    <p>{{ tagline }}</p>
-    <p>{{ intro }}</p>
-
-    <div>
-      {% for link in ctaLinks %}
-        <a href="{{ link.href }}" class="btn">
+  <div class="hero bg-base-200">
+  <div class="hero-content flex-col lg:flex-row">
+    <img
+      src="https://f4.bcbits.com/img/0017491526_10.jpg"
+      class="max-w-sm rounded-lg shadow-2xl"
+    />
+    <section class="flex flex-col gap-y-6 px-4 py-12">
+      <h1 class="text-2xl font-bold">{{ name }}</h1>
+      <p>{{ tagLine }} 👨‍💻🥁</p>
+      <p>{{intro}}</p>
+      <div>
+          {% for link in ctaLinks %}
+          <a href="{{ link.href }}" class="btn">
           {{ link.label }}
-        </a>
-      {% endfor %}
+          </a>
+          {% endfor %}
     </div>
-  </section>
+    </section>
+  </div>
+</div>
 {% endblock %}
